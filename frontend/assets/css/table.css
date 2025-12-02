@@ -1,0 +1,371 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Tabla base */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    color: var(--text-dark);
+    min-width: 800px;
+}
+
+/* Cabecera de tabla */
+.data-table thead {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+.data-table thead tr {
+    background: transparent;
+}
+
+.data-table th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--dark-blue);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.data-table th:last-child {
+    border-right: none;
+}
+
+/* Cuerpo de tabla */
+.data-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+    background: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.data-table td {
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+    line-height: 1.5;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.data-table td:last-child {
+    border-right: none;
+}
+
+/* Celdas específicas */
+.data-table td:first-child {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.data-table td:nth-child(2) {
+    /* Descripción */
+    color: var(--text-secondary);
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.data-table td:nth-child(3),
+/* Tipo */
+.data-table td:nth-child(4),
+/* Lenguaje */
+.data-table td:nth-child(5) {
+    /* Categoría */
+    text-align: center;
+}
+
+/* Badges para tipo, lenguaje y categoría */
+.data-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+    min-width: 80px;
+    border: 1px solid transparent;
+}
+
+.badge-type {
+    background: rgba(30, 64, 175, 0.08);
+    color: var(--primary-blue);
+    border-color: rgba(30, 64, 175, 0.15);
+}
+
+.badge-language {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--bb-light);
+    border-color: rgba(37, 99, 235, 0.15);
+}
+
+.badge-category {
+    background: rgba(96, 165, 250, 0.08);
+    color: var(--light-blue);
+    border-color: rgba(96, 165, 250, 0.15);
+}
+
+/* Fecha */
+.data-date {
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+}
+
+.download-cell {
+    text-align: center;
+    width: 60px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(30, 64, 175, 0.08);
+    color: var(--primary-blue);
+    border: 1px solid rgba(30, 64, 175, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.25rem;
+}
+
+.download-btn:hover {
+    background: var(--primary-blue);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+    border-color: var(--primary-blue);
+}
+
+/* ============================================
+   TABLA COMPLETA
+   ============================================ */
+
+.data-id {
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.8125rem;
+    color: #6b7280;
+    background: rgba(30, 64, 175, 0.03);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+/* Para Rutas */
+.data-route {
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.8125rem;
+    color: var(--secondary-blue);
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0.25rem 0.5rem;
+    background: rgba(59, 130, 246, 0.03);
+    border-radius: 4px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.user-cell {
+    font-weight: 500;
+    color: var(--dark-blue);
+    padding: 0.25rem 0.5rem;
+    background: rgba(30, 58, 138, 0.03);
+    border-radius: 4px;
+    display: inline-block;
+    border: 1px solid rgba(30, 58, 138, 0.1);
+}
+
+/* Columnas de acciones */
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    min-width: 160px;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    white-space: nowrap;
+    min-width: 70px;
+    justify-content: center;
+}
+
+.btn-edit {
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--light-blue);
+    border-color: rgba(96, 165, 250, 0.2);
+}
+
+.btn-edit:hover {
+    background: var(--light-blue);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(96, 165, 250, 0.2);
+    border-color: var(--light-blue);
+}
+
+.btn-delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.btn-delete:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+}
+
+/* Boton especial para ver detalles */
+.btn-view {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--bb-light);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.btn-view:hover {
+    background: var(--bb-light);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+    border-color: var(--bb-light);
+}
+
+
+
+/* Tabla vacía */
+.empty-table {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+}
+
+.empty-table-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+    color: var(--primary-blue);
+}
+
+/* Loading state */
+.table-loading {
+    text-align: center;
+    padding: 2rem;
+}
+
+.table-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(30, 64, 175, 0.1);
+    border-top: 3px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+/* Fila destacada (propio usuario) */
+.own-resource {
+    background: rgba(30, 64, 175, 0.03) !important;
+    border-left: 3px solid var(--primary-blue);
+}
+
+/* Fila seleccionada */
+.data-table tbody tr.selected {
+    background: rgba(30, 64, 175, 0.08) !important;
+    border-left: 3px solid var(--accent-blue);
+}
+
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes highlight {
+    0% {
+        background-color: rgba(30, 64, 175, 0.2);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.data-table tbody tr {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.data-table tbody tr.highlight {
+    animation: highlight 1.5s ease;
+}
+
+.data-table tbody tr:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.data-table tbody tr:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.data-table tbody tr:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.data-table tbody tr:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.data-table tbody tr:nth-child(5) {
+    animation-delay: 0.25s;
+}
