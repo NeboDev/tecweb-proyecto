@@ -14,7 +14,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 
-$app->setBasePath('/tecweb/proyecto/backend');
+$app->setBasePath('/proyecto/backend');
 
 $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
