@@ -18,40 +18,45 @@ class AuthController extends DataBase
     public function login(Request $request, Response $response)
     {
         $params = $request->getParsedBody();
-        $email = $params['email'] ?? '';
+        $email = trim($params['email'] ?? '');
         $password = $params['password'] ?? '';
 
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        $sql = "SELECT * FROM users WHERE email = '{$email}'";
-        $result = $this->conexion->query($sql);
-
-        $valid = false;
-        $user = null;
-
-        if ($result && $result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            if (password_verify($password, $user["password_hash"])) {
-                $valid = true;
-                session_regenerate_id();
-                $_SESSION["user_id"] = $user["id"];
-                $_SESSION["user_name"] = $user["name"];
-
-                $sqlAccess = "INSERT INTO access (id_user, date_access) VALUES (?, NOW())";
-                $stmtAccess = $this->conexion->prepare($sqlAccess);
-                if ($stmtAccess) {
-                    $stmtAccess->bind_param("i", $user['id']);
-                    $stmtAccess->execute();
-                    $stmtAccess->close();
-                }
-
-            }
+        $user = $result->fetch_assoc();
+        if (!$user) {
+            return $this->jsonResponse($response, [
+                'status' => 'error',
+                'message' => "DEBUG: Error en el email o contraseña"
+            ], 401);
         }
 
-        if ($valid) {
-            return $this->jsonResponse($response, ['status' => 'success', 'message' => 'Login correcto']);
-        } else {
-            return $this->jsonResponse($response, ['status' => 'error', 'message' => 'Credenciales inválidas'], 401);
+        if (!password_verify($password, $user["password_hash"])) {
+            return $this->jsonResponse($response, [
+                'status' => 'error',
+                'message' => "DEBUG: Error en el email o contraseña"
+            ], 401);
         }
+
+
+        session_regenerate_id();
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["user_name"] = $user["name"];
+
+        // Registrar acceso
+        $sqlAccess = "INSERT INTO access (id_user, date_access) VALUES (?, NOW())";
+        $stmtAccess = $this->conexion->prepare($sqlAccess);
+        if ($stmtAccess) {
+            $stmtAccess->bind_param("i", $user['id']);
+            $stmtAccess->execute();
+            $stmtAccess->close();
+        }
+
+        return $this->jsonResponse($response, ['status' => 'success', 'message' => 'Login correcto']);
     }
 
     public function register(Request $request, Response $response)
