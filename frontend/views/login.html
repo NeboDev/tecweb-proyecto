@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicia sesión | NekoCloud</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <script defer src="../assets/js/particles.js"></script>
+</head>
+
+<body>
+    <section class="hero">
+        <canvas id="particleCanvas"></canvas>
+
+        <div class="hero-content">
+            <div class="hero-image">
+                <img src="../assets/images/neko_landing_page.png" alt="NekoCloud Platform" class="floating-image" />
+            </div>
+
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-header">
+                        <div class="company-logo">
+                            <img class="logo-icon" src="../assets/images/neko_sleeping.png" alt="NekoCloud Logo">
+                        </div>
+                        <h2>Bienvenido de vuelta</h2>
+                        <p>Por favor inicia sesión para continuar</p>
+                    </div>
+
+                    <form class="login-form" id="loginForm" novalidate>
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+                                <label for="email">Correo Electrónico</label>
+                            </div>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper password-wrapper">
+                                <input type="password" id="password" name="password" required placeholder="••••••••">
+                                <label for="password">Contraseña</label>
+                                <button type="button" class="password-toggle" id="passwordToggle"
+                                    aria-label="Toggle password visibility">
+                                    <span class="toggle-icon"></span>
+                                </button>
+                            </div>
+                            <span class="error-message" id="passwordError"></span>
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            <span class="btn-text">Iniciar Sesión</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                        <span>¿No tienes cuenta?</span>
+                        <span>Regístrate</span>
+                    </div>
+
+                    <div class="success-message" id="successMessage">
+                        <div class="success-icon">✓</div>
+                        <h3>Autenticación correcta</h3>
+                        <p>Redirigiendo a tu espacio de trabajo...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="../assets/js/login.js"></script>
+</body>
+
+</html>
