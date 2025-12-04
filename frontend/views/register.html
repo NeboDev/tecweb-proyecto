@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regístrate | NekoCloud</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/auth.css">
+    <script defer src="../assets/js/particles.js"></script>
+</head>
+
+<body>
+    <section class="hero">
+        <canvas id="particleCanvas"></canvas>
+
+        <div class="hero-content">
+            <div class="hero-image">
+                <img src="../assets/images/neko_signup.png" alt="NekoCloud Platform" class="floating-image" />
+            </div>
+
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-header">
+                        <div class="company-logo">
+                            <img class="logo-icon" src="../assets/images/neko_login.png" alt="NekoCloud Logo">
+                        </div>
+                        <h2>Regístrate para usar <span>NekoCloud</span></h2>
+                        <p>Por favor completa el formulario para continuar</p>
+                    </div>
+
+                    <form class="login-form" id="registerForm" novalidate>
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com"
+                                    autocomplete="off">
+                                <label for="email">Correo Electrónico</label>
+                            </div>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="username" name="username" required placeholder="Juan Cielo"
+                                    autocomplete="off">
+                                <label for="username">Nombre de Usuario</label>
+                            </div>
+                            <span class="error-message" id="usernameError"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="input-wrapper password-wrapper">
+                                <input type="password" id="password" name="password" required placeholder="••••••••"
+                                    autocomplete="new-password">
+                                <label for="password">Contraseña</label>
+                                <button type="button" class="password-toggle" id="passwordToggle1"
+                                    aria-label="Toggle password visibility">
+                                    <span class="toggle-icon"></span>
+                                </button>
+                            </div>
+                            <span class="error-message" id="passwordError"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="input-wrapper password-wrapper">
+                                <input type="password" id="password_confirmation" name="password_confirmation" required
+                                    placeholder="••••••••" autocomplete="new-password">
+                                <label for="password_confirmation">Confirma tu contraseña</label>
+                                <button type="button" class="password-toggle" id="passwordToggle2"
+                                    aria-label="Toggle password visibility">
+                                    <span class="toggle-icon"></span>
+                                </button>
+                            </div>
+                            <span class="error-message" id="passwordConfirmError"></span>
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            <span class="btn-text">Registrarse</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                        <span>¿Ya tienes cuenta?</span>
+                        <a href="login.html"><span>Inicia Sesión</span></a>
+                    </div>
+
+                    <div class="success-message" id="successMessage">
+                        <div class="success-icon">✓</div>
+                        <h3>Registro correcto</h3>
+                        <p>Redirigiendo a la pantalla de inicio...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/register.js"></script>
+</body>
+
+</html>

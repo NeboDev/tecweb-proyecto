@@ -30,6 +30,10 @@
     margin-bottom: 2.5rem;
 }
 
+.login-header h2 span {
+    color: var(--primary-blue);
+}
+
 .company-logo {
     margin-bottom: 1.5rem;
 }
@@ -238,6 +242,17 @@
     color: var(--accent-blue);
 }
 
+.divider a {
+    color: var(--primary-blue);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.divider a:hover {
+    color: var(--accent-blue);
+}
 
 .success-message {
     position: absolute;
