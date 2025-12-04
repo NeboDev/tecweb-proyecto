@@ -26,9 +26,11 @@ class ResourceController extends DataBase
             if ($resultCheck->num_rows == 0) {
 
 
-                $sqlInsert = "INSERT INTO resources (name, description, route, type, language, category, date, id_user) 
+                $sqlInsert = "INSERT INTO resources (name,departamento,empresa,description,route,type,language,category,date,id_user) 
                               VALUES (
                                   '{$params['name']}', 
+                                  '{$params['departamento']}',
+                                  '{$params['empresa']}',
                                   '{$params['description']}', 
                                   '{$params['route']}', 
                                   '{$params['type']}', 
