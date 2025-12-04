@@ -1,0 +1,225 @@
+.announcement-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.announcement-image {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.announcement-image .floating-image {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    filter: drop-shadow(0 15px 30px rgba(30, 58, 138, 0.15));
+    border-radius: 12px;
+}
+
+
+.announcement-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+
+.announcement-card {
+    background: var(--bg-light);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-light);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.announcement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg,
+            var(--primary-blue),
+            var(--secondary-blue),
+            var(--accent-blue));
+    border-radius: 20px 20px 0 0;
+}
+
+
+.announcement-header {
+    margin-bottom: 2.5rem;
+}
+
+.announcement-header h2 {
+    color: var(--text-dark);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.announcement-header p {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+
+.announcement-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+
+.btn-announcement {
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.btn-announcement-primary {
+    background: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+}
+
+.btn-announcement-primary:hover {
+    background: var(--accent-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.35);
+}
+
+.btn-announcement-secondary {
+    background: rgba(30, 64, 175, 0.1);
+    color: var(--primary-blue);
+    border: 2px solid rgba(30, 64, 175, 0.2);
+}
+
+.btn-announcement-secondary:hover {
+    background: rgba(30, 64, 175, 0.15);
+    transform: translateY(-2px);
+    border-color: var(--primary-blue);
+}
+
+
+.announcement-body {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.announcement-body p {
+    margin-bottom: 1rem;
+}
+
+
+
+.announcement-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.2);
+}
+
+
+.announcement-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+
+@media (max-width: 768px) {
+    .announcement-content {
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .announcement-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .announcement-header h2 {
+        font-size: 2rem;
+    }
+
+    .announcement-header p {
+        font-size: 1.125rem;
+    }
+
+    .announcement-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-announcement {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .announcement-image .floating-image {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .announcement-content {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .announcement-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .announcement-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .announcement-header p {
+        font-size: 1rem;
+    }
+
+    .announcement-image .floating-image {
+        max-width: 240px;
+    }
+}
