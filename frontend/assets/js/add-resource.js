@@ -1,6 +1,8 @@
-const baseURL = 'http://localhost/tecweb-proyecto/backend';
+const baseURL = 'http://localhost/proyecto-tecweb/backend';
 
 $(document).ready(function () {
+    getUserID();
+
     // Sidebar toggle
     $('#sidebarToggle').click(function () {
         $('.sidebar').toggleClass('active');
@@ -61,6 +63,21 @@ $(document).ready(function () {
             $('#dropZone').css('border-color', 'var(--primary-blue)');
             $('#dropZone').css('background-color', 'rgba(59, 130, 246, 0.05)');
         }
+    }
+
+    function getUserID() {
+        let user_id = null;
+        $.get(`${baseURL}/auth/status`, function (authData) {
+            if (authData.is_logged_in) {
+                user_id = authData.user.id;
+                user_name = authData.user.name;
+                $('.user-name').text(user_name);
+            } else {
+                alert("Debes iniciar sesión para subir recursos.");
+                window.location.href = '../views/announcement.html'; // Redirect
+                return;
+            }
+        });
     }
 
     // Form submission
@@ -137,6 +154,29 @@ $(document).ready(function () {
             alert("Error al verificar la sesión.");
             btn.removeClass('loading');
             btn.prop('disabled', false);
+        });
+    });
+
+    $('#logoutBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (!confirm("¿Estas seguro de que deseas cerrar sesión?")) return;
+
+        $.ajax({
+            url: baseURL + '/auth/logout',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    window.location.href = '../index.html';
+                } else {
+                    alert('No se pudo cerrar sesión correctamente');
+                }
+            },
+            error: function () {
+                console.error('Error al intentar cerrar sesión en el servidor');
+                window.location.href = '../index.html';
+            }
         });
     });
 });
