@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NekoCloud - Subir Recurso</title>
 
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,8 +17,11 @@
 </head>
 
 <body>
+    <div class="hero"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;">
+        <canvas id="particleCanvas"></canvas>
+    </div>
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="../index.html" class="logo">
@@ -70,7 +72,6 @@
                 </div>
             </header>
 
-            <!-- Content -->
             <div class="content-wrapper">
                 <div class="section-card" style="max-width: 800px; margin: 0 auto;">
                     <form id="addResourceForm" class="login-form">
@@ -91,31 +92,33 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                             <div class="form-group">
                                 <div class="input-wrapper">
-                                    <input type="text" id="type" name="type" required placeholder=" "
-                                        list="typeOptions">
-                                    <label for="type">Tipo de Archivo</label>
-                                    <datalist id="typeOptions">
-                                        <option value="PDF">
-                                        <option value="Imagen">
-                                        <option value="Video">
-                                        <option value="Documento">
-                                        <option value="Código">
-                                    </datalist>
+                                    <input type="text" id="language" name="language" required placeholder=" ">
+                                    <label for="language">Lenguaje</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-wrapper">
-                                    <input type="text" id="language" name="language" required placeholder=" ">
-                                    <label for="language">Lenguaje</label>
+                                    <input type="text" id="category" name="category" required placeholder=" ">
+                                    <label for="category">Categoría</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="input-wrapper">
-                                <input type="text" id="category" name="category" required placeholder=" ">
-                                <label for="category">Categoría</label>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" id="department" name="department" required placeholder=" ">
+                                    <label for="department">Departamento</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" id="company" name="company" required placeholder=" ">
+                                    <label for="company">Empresa</label>
+                                </div>
                             </div>
                         </div>
 
@@ -145,9 +148,9 @@
         </main>
     </div>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/add-resource.js"></script>
+    <script defer src="../assets/js/particles.js"></script>
 </body>
 
 </html>
