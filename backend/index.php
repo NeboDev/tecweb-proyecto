@@ -59,6 +59,7 @@ $app->group('/resources', function ($group) {
     $group->post('/delete', ResourceController::class . ':delete');
     $group->get('/user-resources', ResourceController::class . ':getUserResources');
     $group->get('/search', ResourceController::class . ':search');
+    $group->get('/search-useresources', ResourceController::class . ':searchUserResources');
     $group->post('/single', ResourceController::class . ':getOne');
     $group->get('/check-name', ResourceController::class . ':getByName');
     $group->post('/download', ResourceController::class . ':registerDownload');

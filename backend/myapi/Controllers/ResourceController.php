@@ -128,6 +128,25 @@ class ResourceController extends DataBase
         return $this->jsonResponse($response, $data);
     }
 
+    public function searchUserResources(Request $request, Response $response)
+    {
+        $queryParams = $request->getQueryParams();
+        $search = $queryParams['search'] ?? '';
+        $id = $queryParams['id_user'] ?? null;
+
+        // SQL Directo con concatenación de %
+        $sql = "SELECT * FROM resources WHERE (name LIKE '%{$search}%' OR description LIKE '%{$search}%' OR type LIKE '%{$search}%') AND id_user = {$id} AND `delete` = 0";
+
+        $result = $this->conexion->query($sql);
+        $data = [];
+
+        if ($result) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+        }
+
+        return $this->jsonResponse($response, $data);
+    }
 
     public function getOne(Request $request, Response $response)
     {
