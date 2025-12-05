@@ -93,6 +93,21 @@ class ResourceController extends DataBase
         return $this->jsonResponse($response, $data);
     }
 
+    public function getUserResources(Request $request, Response $response)
+    {
+        $id = $request->getQueryParams()['id_user'] ?? null;
+        $data = [];
+
+        $sql = "SELECT * FROM resources WHERE id_user = {$id} AND `delete` = 0";
+        $result = $this->conexion->query($sql);
+
+        if ($result) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+        }
+
+        return $this->jsonResponse($response, $data);
+    }
 
     public function search(Request $request, Response $response)
     {
