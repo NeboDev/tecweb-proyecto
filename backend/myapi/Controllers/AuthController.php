@@ -48,11 +48,11 @@ class AuthController extends DataBase
         $_SESSION["user_name"] = $user["name"];
 
         // Registrar acceso
-        $sqlAccess = "INSERT INTO access (id_user, date_access, action) VALUES (?, NOW(), ?)";
+        $sqlAccess = "INSERT INTO access (id_user, date_access, type_access) VALUES (?, NOW(), ?)";
         $stmtAccess = $this->conexion->prepare($sqlAccess);
         if ($stmtAccess) {
-            $action = "LOGIN";
-            $stmtAccess->bind_param("is", $user['id'], $action);
+            $type_access = "LOGIN";
+            $stmtAccess->bind_param("is", $user['id'], $type_access);
             $stmtAccess->execute();
             $stmtAccess->close();
         }
@@ -117,14 +117,16 @@ class AuthController extends DataBase
 
     public function logout(Request $request, Response $response)
     {
-        $user = $_SESSION["user_id"];
-        $sqlAccess = "INSERT INTO access (id_user, date_access, action) VALUES (?, NOW(), ?)";
-        $stmtAccess = $this->conexion->prepare($sqlAccess);
-        if ($stmtAccess) {
-            $action = "LOGOUT";
-            $stmtAccess->bind_param("is", $user['id'], $action);
-            $stmtAccess->execute();
-            $stmtAccess->close();
+        if (isset($_SESSION['user_id'])) {
+            $userID = $_SESSION["user_id"];
+            $sqlAccess = "INSERT INTO access (id_user, date_access, type_access) VALUES (?, NOW(), ?)";
+            $stmtAccess = $this->conexion->prepare($sqlAccess);
+            if ($stmtAccess) {
+                $type_access = "LOGOUT";
+                $stmtAccess->bind_param("is", $userID, $type_access);
+                $stmtAccess->execute();
+                $stmtAccess->close();
+            }
         }
         session_destroy();
         return $this->jsonResponse($response, ['status' => 'success', 'message' => 'Logout correcto']);
