@@ -22,9 +22,11 @@ $(document).ready(function () {
     });
 });
 
+// simulaoooo
+const USER_ID = 1;
+
 function loadResources() {
-    $.get(`${baseURL}/resources`, function (data) {
-        //console.log("Resources data:", data); // Debugging. update: was me haha
+    $.get(`${baseURL}/resources/user-resources`, { id_user: USER_ID }, function (data) {
         renderTable(data);
     }).fail(function () {
         console.error("Error al cargar recursos");
@@ -32,7 +34,7 @@ function loadResources() {
 }
 
 function searchResources(query) {
-    $.get(`${baseURL}/resources/search`, { search: query }, function (data) {
+    $.get(`${baseURL}/resources/search`, { search: query, id_user: USER_ID }, function (data) {
         renderTable(data);
     }).fail(function () {
         console.error("Error en la búsqueda");
@@ -68,9 +70,12 @@ function renderTable(data) {
                 <td>${resource.empresa || '-'}</td>
                 <td>${resource.date}</td>
                 <td>
-                    <div>
+                    <div style="display: flex; gap: 8px;">
                         <button onclick="downloadResource(${resource.id_resource})" class="btn-icon-sm" title="Descargar" style="color: var(--primary-blue); background: none; border: none; cursor: pointer;">
                             <i class="bi bi-download"></i>
+                        </button>
+                        <button onclick="deleteResource(${resource.id_resource})" class="btn-icon-sm" title="Eliminar" style="color: #ef4444; background: none; border: none; cursor: pointer;">
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>
                 </td>
