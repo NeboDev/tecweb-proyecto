@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NekoCloud - Subir Recurso</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/auth.css">
+</head>
+
+<body>
+    <div class="hero"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;">
+        <canvas id="particleCanvas"></canvas>
+    </div>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/neko_sleeping.png" alt="NekoCloud Logo"
+                        style="height: 40px; width: auto;">
+                    NekoCloud
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="catalog.html" class="nav-item">
+                    <i class="bi bi-folder-fill"></i>
+                    <span>Mis Archivos</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <i class="bi bi-cloud-upload-fill"></i>
+                    <span>Subir Recurso</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../index.html" class="nav-item" style="color: #ef4444;">
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">
+                    <h2>Subir Nuevo Recurso</h2>
+                </div>
+
+                <div class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">aqui debe ir el nombre del usuario</span>
+                        <span class="user-role">Desarrollador</span>
+                    </div>
+                    <div class="user-avatar">
+                        U
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="section-card" style="max-width: 800px; margin: 0 auto;">
+                    <form id="addResourceForm" class="login-form">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="name" name="name" required placeholder=" ">
+                                <label for="name">Nombre del Recurso</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="description" name="description" required placeholder=" ">
+                                <label for="description">Descripción</label>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" id="language" name="language" required placeholder=" ">
+                                    <label for="language">Lenguaje</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" id="category" name="category" required placeholder=" ">
+                                    <label for="category">Categoría</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" id="department" name="department" required placeholder=" ">
+                                    <label for="department">Departamento</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" id="company" name="company" required placeholder=" ">
+                                    <label for="company">Empresa</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Seleccionar
+                                Archivo</label>
+                            <div style="border: 2px dashed var(--border-light); padding: 2rem; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;"
+                                onclick="document.getElementById('fileInput').click()" id="dropZone">
+                                <i class="bi bi-cloud-arrow-up"
+                                    style="font-size: 2rem; color: var(--primary-blue);"></i>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary);">Haz clic para seleccionar o
+                                    arrastra un archivo aquí</p>
+                                <p id="fileName" style="margin-top: 0.5rem; font-weight: 600; color: var(--text-dark);">
+                                </p>
+                            </div>
+                            <input type="file" id="fileInput" style="display: none;">
+                        </div>
+
+                        <button type="submit" class="login-btn" style="background: var(--primary-blue);">
+                            <span class="btn-text">Subir Recurso</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/add-resource.js"></script>
+    <script defer src="../assets/js/particles.js"></script>
+</body>
+
+</html>
