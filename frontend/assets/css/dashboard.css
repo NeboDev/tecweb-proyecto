@@ -321,6 +321,18 @@ body {
     background: rgba(59, 130, 246, 0.02);
 }
 
+.charts-row {
+    display: flex;
+    gap: 20px;
+    /* espacio entre los gráficos */
+}
+
+.chart-card {
+    flex: 1;
+    /* que ambos ocupen el mismo ancho */
+}
+
+
 /* =========================================
    6. Responsive
    ========================================= */

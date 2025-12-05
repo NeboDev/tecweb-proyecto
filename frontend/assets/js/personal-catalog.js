@@ -1,7 +1,9 @@
 const baseURL = 'http://localhost/tecweb-proyecto/backend';
 
+let currentUserId = null;
+
 $(document).ready(function () {
-    loadResources();
+    getUserID();
 
     let timeout = null;
     $('#searchInput').on('keyup', function () {
@@ -20,24 +22,85 @@ $(document).ready(function () {
     $('#sidebarToggle').click(function () {
         $('.sidebar').toggleClass('active');
     });
+
+    $('#logoutBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (!confirm("¿Estas seguro de que deseas cerrar sesión?")) return;
+
+        $.ajax({
+            url: baseURL + '/auth/logout',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    window.location.href = 'logout.html';
+                } else {
+                    alert('No se pudo cerrar sesión correctamente: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al intentar cerrar sesión:', error);
+                alert('Error de conexión al cerrar sesión: ' + xhr.status + ' ' + error);
+            }
+        });
+    });
 });
 
-// simulaoooo
-const USER_ID = 1;
+function getUserID() {
+    $.ajax({
+        url: `${baseURL}/auth/status`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (authData) {
+            if (authData.is_logged_in) {
+                currentUserId = authData.user.id;
+                user_name = authData.user.name;
+                $('.user-name').text(user_name);
+                loadResources();
+            } else {
+                alert("Debes iniciar sesión para ver tus archivos.");
+                window.location.href = '../views/announcement.html';
+                return;
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error checking auth status:", error);
+        }
+    });
+}
 
 function loadResources() {
-    $.get(`${baseURL}/resources/user-resources`, { id_user: USER_ID }, function (data) {
-        renderTable(data);
-    }).fail(function () {
-        console.error("Error al cargar recursos");
+    if (!currentUserId) return;
+
+    $.ajax({
+        url: `${baseURL}/resources/user-resources`,
+        type: 'GET',
+        data: { id_user: currentUserId },
+        dataType: 'json',
+        success: function (data) {
+            renderTable(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al cargar recursos:", error);
+        }
     });
 }
 
 function searchResources(query) {
-    $.get(`${baseURL}/resources/search`, { search: query, id_user: USER_ID }, function (data) {
-        renderTable(data);
-    }).fail(function () {
-        console.error("Error en la búsqueda");
+    if (!currentUserId) return;
+
+    $.ajax({
+        url: `${baseURL}/resources/search-useresources`,
+        type: 'GET',
+        data: { search: query, id_user: currentUserId },
+        dataType: 'json',
+        success: function (data) {
+            renderTable(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error en la búsqueda:", error);
+        }
     });
 }
 
@@ -135,40 +198,57 @@ function getDeviconClass(type) {
 
 function deleteResource(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este archivo?")) {
-        $.post(`${baseURL}/resources/delete`, { id: id }, function (response) {
-            if (response.status === 'success') {
-                // Recargar la tabla
-                const query = $('#searchInput').val();
-                if (query.length > 0) {
-                    searchResources(query);
+        $.ajax({
+            url: `${baseURL}/resources/delete`,
+            type: 'POST',
+            data: { id: id },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    // Recargar la tabla
+                    const query = $('#searchInput').val();
+                    if (query.length > 0) {
+                        searchResources(query);
+                    } else {
+                        loadResources();
+                    }
                 } else {
-                    loadResources();
+                    alert("Error al eliminar: " + response.message);
                 }
-            } else {
-                alert("Error al eliminar: " + response.message);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error de conexión:", error);
+                alert("Error de conexión al intentar eliminar.");
             }
-        }).fail(function () {
-            alert("Error de conexión al intentar eliminar.");
         });
     }
 }
 
 function downloadResource(id) {
-    // m4rvick id, change it to the user id of the logged in user
-    const userId = 3;
+    if (!currentUserId) {
+        alert("Error: No se ha identificado al usuario. Intenta recargar la página.");
+        return;
+    }
 
-    $.post(`${baseURL}/resources/download`, {
-        id_resource: id,
-        id_user: userId
-    }, function (response) {
-        if (response.status === 'success') {
-            alert("¡Descarga registrada! Iniciando descarga...");
-        } else {
-            console.error("Error al registrar descarga:", response.message);
-            alert("Error al registrar la descarga");
+    $.ajax({
+        url: `${baseURL}/resources/download`,
+        type: 'POST',
+        data: {
+            id_resource: id,
+            id_user: currentUserId
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (response.status === 'success') {
+                alert("¡Descarga registrada! Iniciando descarga...");
+            } else {
+                console.error("Error al registrar descarga:", response.message);
+                alert("Error al registrar la descarga");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error de conexión:", error);
+            alert("Error de conexión al intentar descargar");
         }
-    }).fail(function () {
-        console.error("Error de conexión");
-        alert("Error de conexión al intentar descargar");
     });
 }

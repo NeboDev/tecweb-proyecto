@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let baseURL = 'http://localhost/proyecto/backend';
+    let baseURL = 'http://localhost/tecweb-proyecto/backend';
 
 
     $('#passwordToggle').on('click', function () {
